@@ -6,20 +6,30 @@ on:
   workflow_dispatch:
     inputs:
       ide_url:
-        description: "JetBrains IDE (Windows zip) used as the compile SDK, e.g. https://download.jetbrains.com/idea/ideaIC-2026.2.win.zip"
+        description: "Optional override: JetBrains IDE (Windows zip) download URL. Leave empty to auto-resolve the latest IntelliJ IDEA Community release."
         required: false
-        default: "https://download.jetbrains.com/idea/ideaIC-2026.2.win.zip"
+        default: ""
 
 jobs:
   build:
     runs-on: windows-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download IntelliJ Platform IDE (platform jars + bundled JDK)
+      - name: Resolve & download IntelliJ Platform IDE (platform jars + bundled JDK)
         shell: pwsh
         run: |
-          $url = "${{ github.event.inputs.ide_url || 'https://download.jetbrains.com/idea/ideaIC-2026.2.win.zip' }}"
+          $url = "${{ github.event.inputs.ide_url }}"
+          if (-not $url) {
+            # Resolve the latest IntelliJ IDEA Community (IIC) Windows zip from the
+            # official JetBrains releases API instead of hardcoding a version URL.
+            $api = Invoke-RestMethod "https://data.services.jetbrains.com/products/releases?code=IIC&latest=true&type=release" -TimeoutSec 60
+            $release = $api.IIC | Select-Object -First 1
+            $dl = $release.downloads.PSObject.Properties.Value | Where-Object { $_.link -like "*.zip" } | Select-Object -First 1
+            $url = $dl.link
+          }
           Write-Host "Downloading $url"
           Invoke-WebRequest -Uri $url -OutFile ide.zip
           Expand-Archive ide.zip -DestinationPath ide
