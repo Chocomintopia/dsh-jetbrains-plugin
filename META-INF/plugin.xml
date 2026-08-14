@@ -7,19 +7,27 @@
   <vendor url="https://github.com/Chocomintopia/dsh-jetbrains-plugin" email="mikudayo0139@163.com">39</vendor>
   <description><![CDATA[
     <p>Docks the <a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a>
-    Web UI into a JetBrains IDE tool window, rendered by the IDE's bundled Chromium (JCEF).
-    The full WebUI &mdash; reasoning streams, tool-call trajectory, sessions,
-    permission/preset switching &mdash; lives inside the IDE, hideable like the terminal.</p>
+    Web UI into an IDE tool window, rendered by the IDE's bundled Chromium (JCEF). The whole
+    agent interface &mdash; reasoning streams, tool-call trajectory, sessions, permission/preset
+    switching &mdash; lives inside the IDE, hideable like the terminal.</p>
+
+    <h3>How to use</h3>
+    <ol>
+      <li>Start the DeepSeek Harness Web UI in a terminal:
+      <code>npx @deepseek-ai/dsh web</code> (served at <code>http://127.0.0.1:3080</code> by default).</li>
+      <li>Open the <b>DeepSeek Harness</b> tool window on the right edge of the IDE &mdash; the Web UI loads inside it.</li>
+      <li>Whenever you restart or rebuild the <code>dsh</code> server, click the <b>reload button</b> in the
+      tool-window header (or gear menu &rarr; <em>Reload Page</em>) to refresh instantly &mdash; no IDE restart needed.</li>
+    </ol>
+
     <h3>Features</h3>
     <ul>
       <li>DeepSeek Harness Web UI docked as a standard IDE tool window</li>
-      <li>Reload the page without restarting the IDE &mdash; header button or gear menu
-      <em>Reload Page</em> (hard reload, browser cache bypassed)</li>
+      <li>Reload the page without restarting the IDE (hard reload, browser cache bypassed)</li>
       <li>Theme-aware tool window icon (light/dark)</li>
     </ul>
-    <p>Requires the official DeepSeek Harness with web support running locally
-    (<code>npx @deepseek-ai/dsh web</code>), served at <code>http://127.0.0.1:3080</code>
-    by default (configurable via the <code>dsh.web.url</code> JVM property).</p>
+
+    <p>Homepage: <a href="https://github.com/Chocomintopia/dsh-jetbrains-plugin">github.com/Chocomintopia/dsh-jetbrains-plugin</a></p>
   ]]></description>
   <change-notes><![CDATA[
     <h3>0.1.0</h3>
