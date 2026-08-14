@@ -27,7 +27,10 @@ jobs:
             # official JetBrains releases API instead of hardcoding a version URL.
             $api = Invoke-RestMethod "https://data.services.jetbrains.com/products/releases?code=IIC&latest=true&type=release" -TimeoutSec 60
             $release = $api.IIC | Select-Object -First 1
-            $dl = $release.downloads.PSObject.Properties.Value | Where-Object { $_.link -like "*.zip" } | Select-Object -First 1
+            # Pick only the Windows binary zip on download.jetbrains.com; the API
+            # also exposes a "github" source archive entry which we must skip.
+            $dl = $release.downloads.PSObject.Properties.Value | Where-Object { $_.link -like "https://download.jetbrains.com/*.win.zip" } | Select-Object -First 1
+            if (-not $dl) { throw "No Windows zip found in JetBrains releases API" }
             $url = $dl.link
           }
           Write-Host "Downloading $url"
