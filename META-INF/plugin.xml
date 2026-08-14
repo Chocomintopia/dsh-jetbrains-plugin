@@ -2,7 +2,7 @@
 <!-- DeepSeek Harness Web tool window. URL: -Ddsh.web.url=http://127.0.0.1:3080 -->
 <idea-plugin>
   <id>dsh.web.toolwindow</id>
-  <name>DeepSeek Harness for JetBrains IDE</name>
+  <name>DeepSeek Harness WebUI</name>
   <version>0.1.0</version>
   <vendor url="https://github.com/Chocomintopia/dsh-jetbrains-plugin" email="mikudayo0139@163.com">39</vendor>
   <description><![CDATA[
