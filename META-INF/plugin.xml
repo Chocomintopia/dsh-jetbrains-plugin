@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DeepSeek Harness Web tool window. URL: -Ddsh.web.url=http://127.0.0.1:3080 -->
+<idea-plugin>
+  <id>dsh.web.toolwindow</id>
+  <name>DeepSeek Harness for JetBrains IDE</name>
+  <version>0.2.0</version>
+  <vendor url="https://github.com/Chocomintopia/dsh-jetbrains-plugin" email="mikudayo0139@163.com">39</vendor>
+  <description><![CDATA[
+    <p>Docks the <a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a>
+    Web UI into a JetBrains IDE tool window, rendered by the IDE's bundled Chromium (JCEF).
+    The full WebUI &mdash; reasoning streams, tool-call trajectory, sessions,
+    permission/preset switching &mdash; lives inside the IDE, hideable like the terminal.</p>
+    <h3>Features</h3>
+    <ul>
+      <li>DeepSeek Harness Web UI docked as a standard IDE tool window</li>
+      <li>Reload the page without restarting the IDE &mdash; header button or gear menu
+      <em>Reload Page</em> (hard reload, browser cache bypassed)</li>
+      <li>Theme-aware tool window icon (light/dark)</li>
+    </ul>
+    <p>Requires the official DeepSeek Harness with web support running locally
+    (<code>npx @deepseek-ai/dsh web</code>), served at <code>http://127.0.0.1:3080</code>
+    by default (configurable via the <code>dsh.web.url</code> JVM property).</p>
+  ]]></description>
+  <change-notes><![CDATA[
+    <h3>0.2.0</h3>
+    <ul>
+      <li>New: reload the Web UI without restarting the IDE &mdash; reload button in the
+      tool-window header and <em>Reload Page</em> in the gear menu (hard reload, cache bypassed).</li>
+      <li>New: theme-aware tool window icon that adapts to light/dark IDE themes.</li>
+    </ul>
+  ]]></change-notes>
+  <idea-version since-build="262" />
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.jcef</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Icon: official-whale-gray.svg (light theme) +
+         official-whale-gray_dark.svg (dark theme, JetBrains _dark convention). -->
+    <toolWindow id="DeepSeek Harness" anchor="right" icon="/icons/official-whale-gray.svg" factoryClass="dsh.web.plugin.DshWebToolWindowFactory" />
+  </extensions>
+  <actions>
+    <!-- Reload the Web UI without restarting the IDE (cache bypassed). -->
+    <!-- No keyboard shortcut is bound here on purpose: it could clash with
+         other keybindings. Users can assign one in Settings | Keymap. -->
+    <action id="dsh.web.reload" class="dsh.web.plugin.ReloadPageAction"
+            text="Reload DeepSeek Harness Page"
+            description="Reload the DeepSeek Harness Web UI, bypassing the cache" />
+  </actions>
+</idea-plugin>

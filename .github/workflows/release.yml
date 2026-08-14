@@ -1,0 +1,45 @@
+name: Build & Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      ide_url:
+        description: "JetBrains IDE (Windows zip) used as the compile SDK, e.g. https://download.jetbrains.com/idea/ideaIC-2026.2.win.zip"
+        required: false
+        default: "https://download.jetbrains.com/idea/ideaIC-2026.2.win.zip"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download IntelliJ Platform IDE (platform jars + bundled JDK)
+        shell: pwsh
+        run: |
+          $url = "${{ github.event.inputs.ide_url || 'https://download.jetbrains.com/idea/ideaIC-2026.2.win.zip' }}"
+          Write-Host "Downloading $url"
+          Invoke-WebRequest -Uri $url -OutFile ide.zip
+          Expand-Archive ide.zip -DestinationPath ide
+
+      - name: Build plugin
+        shell: pwsh
+        run: |
+          $ide = Get-ChildItem ide -Directory | Select-Object -First 1
+          powershell -NoProfile -ExecutionPolicy Bypass -File build.ps1 -IdeRoot $ide.FullName
+
+      - name: Upload jar artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dsh-web-jetbrains-toolwindow
+          path: releases/dsh-web-jetbrains-toolwindow.jar
+
+      - name: Attach to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            releases/dsh-web-jetbrains-toolwindow.jar
+            releases/dsh-web-jetbrains-toolwindow.zip

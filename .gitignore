@@ -1,0 +1,15 @@
+# IDE-local files
+.idea/
+
+# build outputs
+out/
+classes/
+staging/
+compile.args
+*.class
+
+# distribution artifacts (published via GitHub Releases)
+releases/
+
+# local agent skills (not part of the open-source plugin)
+skills/
