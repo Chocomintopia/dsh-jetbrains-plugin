@@ -3,6 +3,8 @@
 [中文](README.md) | English
 
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+[![Version](https://img.shields.io/jetbrains/plugin/v/33556.svg)](https://plugins.jetbrains.com/plugin/33556-deepseek-harness-webui)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/33556.svg)](https://plugins.jetbrains.com/plugin/33556-deepseek-harness-webui)
 
 Docks the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) Web UI into a JetBrains IDE tool window, rendered by the IDE's bundled Chromium (JCEF). The full WebUI — reasoning streams, tool-call trajectory, sessions, permission/preset switching — **lives entirely inside the IDE, hideable like the terminal — no browser tab needed**.
 
@@ -30,7 +32,7 @@ npx @deepseek-ai/dsh web
 
 ### 2. Install the plugin
 
-- **JetBrains Marketplace** (recommended): <a href="https://plugins.jetbrains.com/plugin/<PLUGIN_ID>">DeepSeek Harness for JetBrains IDE</a> — **Settings | Plugins | Marketplace**. *(Currently in review; use the disk install below until it goes live.)*
+- **JetBrains Marketplace** (recommended): <a href="https://plugins.jetbrains.com/plugin/33556-deepseek-harness-webui">DeepSeek Harness WebUI</a> — **Settings | Plugins | Marketplace**.
 - **From disk**: download `dsh-web-jetbrains-toolwindow.jar` from [GitHub Releases](https://github.com/Chocomintopia/dsh-jetbrains-plugin/releases), then **Settings | Plugins | ⚙ | Install Plugin from Disk…**.
 - **From source**: see [Building](#building).
 

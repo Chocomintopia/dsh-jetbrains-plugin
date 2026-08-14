@@ -3,6 +3,8 @@
 中文 | [English](README.en.md)
 
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+[![Version](https://img.shields.io/jetbrains/plugin/v/33556.svg)](https://plugins.jetbrains.com/plugin/33556-deepseek-harness-webui)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/33556.svg)](https://plugins.jetbrains.com/plugin/33556-deepseek-harness-webui)
 
 将 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的 Web UI 嵌入 JetBrains IDE 的工具窗口，由 IDE 自带的 Chromium（JCEF）渲染。完整的 WebUI —— 推理流、工具调用轨迹、会话、权限/预设切换 —— **全部在 IDE 内部，像终端一样可以随时隐藏/显示，不需要再开一个浏览器标签页**。
 
@@ -30,7 +32,7 @@ npx @deepseek-ai/dsh web
 
 ### 2. 安装插件
 
-- **JetBrains Marketplace**（推荐）：<a href="https://plugins.jetbrains.com/plugin/<PLUGIN_ID>">DeepSeek Harness for JetBrains IDE</a> —— **Settings | Plugins | Marketplace**。*（发布中；在此之前请用下面的磁盘安装方式。）*
+- **JetBrains Marketplace**（推荐）：<a href="https://plugins.jetbrains.com/plugin/33556-deepseek-harness-webui">DeepSeek Harness WebUI</a> —— **Settings | Plugins | Marketplace**。
 - **磁盘安装**：从 [GitHub Releases](https://github.com/Chocomintopia/dsh-jetbrains-plugin/releases) 下载 `dsh-web-jetbrains-toolwindow.jar`，然后 **Settings | Plugins | ⚙ | Install Plugin from Disk…**。
 - **源码构建**：见[构建](#构建)。
 
