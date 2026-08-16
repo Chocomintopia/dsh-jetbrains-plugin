@@ -36,7 +36,7 @@ npx @deepseek-ai/dsh web
 - **磁盘安装**：从 [GitHub Releases](https://github.com/Chocomintopia/dsh-jetbrains-plugin/releases) 下载 `dsh-web-jetbrains-toolwindow.jar`，然后 **Settings | Plugins | ⚙ | Install Plugin from Disk…**。
 - **源码构建**：见[构建](#构建)。
 
-要求：带 JCEF 的 JetBrains IDE —— 平台 build 262+（2026.2+），如 Rider（已验证）、IntelliJ IDEA、PyCharm、WebStorm 等。安装更新需要重启一次 IDE（JetBrains 插件惯例）。
+要求：带 JCEF 的 JetBrains IDE —— 平台 build 262+（2026.2+），如 Rider（已验证）、IntelliJ IDEA、PyCharm（已验证）、WebStorm 等。安装更新需要重启一次 IDE（JetBrains 插件惯例）。
 
 ### 3. 在终端启动 web 服务
 
