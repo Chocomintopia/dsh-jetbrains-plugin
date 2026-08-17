@@ -9,11 +9,13 @@
 将 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的 Web UI 嵌入 JetBrains IDE 的工具窗口，由 IDE 自带的 Chromium（JCEF）渲染。完整的 WebUI —— 推理流、工具调用轨迹、会话、权限/预设切换 —— **全部在 IDE 内部，像终端一样可以随时隐藏/显示，不需要再开一个浏览器标签页**。
 
 ![01.png](/docs/screenshots/01.png)
+![01.png](/docs/screenshots/02.png)
 
 ## 功能特性
 
 - **Web UI 内嵌 IDE** —— DeepSeek Harness 的 Web 前端以标准工具窗口的形式停靠在右侧，与浏览器版本观感、行为完全一致。
-- **无需重启 IDE 即可刷新** —— 重启或重建 `dsh` 服务后，点击工具窗口标题栏的刷新按钮（或齿轮菜单 → *Reload Page*）即可硬刷新页面，绕过浏览器缓存。再也不需要重启 IDE。
+- **DeepSeek Chat 固定标签页** —— `chat.deepseek.com` 固定为 WebUI 旁边的第二个标签页，始终存在、不可关闭；想用 DeepSeek 网页版时无需再开浏览器。
+- **无需重启 IDE 即可刷新** —— 重启或重建 `dsh` 服务后，点击工具窗口标题栏的刷新按钮（或齿轮菜单 → *Reload Page*）即可硬刷新**当前激活的标签页**（WebUI 或 DeepSeek Chat），绕过浏览器缓存。再也不需要重启 IDE。
 - **图标随主题切换** —— 工具窗口图标自动适配 IDE 的深色/浅色主题。
 
 ## 快速开始
@@ -49,14 +51,14 @@ npx @deepseek-ai/dsh web
 ### 4. 打开工具窗口并刷新
 
 1. 在 IDE 右侧边缘打开 **DeepSeek Harness** 工具窗口。
-2. Web UI 会加载进来 —— 与浏览器里看到的是同一个页面。
-3. 每当重启/重建 `dsh` 服务，或页面看起来过期时：点击**工具窗口标题栏右上角的 ↻ 刷新按钮**，或打开齿轮菜单 → **Reload Page**。页面会硬刷新（绕过缓存）——无需重启 IDE。
+2. Web UI 会加载进来 —— 与浏览器里看到的是同一个页面；旁边固定着一个 **DeepSeek Chat** 标签页（`chat.deepseek.com`，首次使用需登录）。
+3. 每当重启/重建 `dsh` 服务，或页面看起来过期时：点击**工具窗口标题栏右上角的 ↻ 刷新按钮**，或打开齿轮菜单 → **Reload Page**。当前激活的标签页会硬刷新（绕过缓存）——无需重启 IDE。
 
 ## 项目内容
 
 ### 工具窗口（JCEF）
 
-`DshWebToolWindowFactory` 创建指向 DSH Web UI 的 `JBCefBrowser`，并通过平台 content manager 将其停靠为标准工具窗口。每个项目的活动浏览器会被注册下来，方便动作（action）访问。
+`DshWebToolWindowFactory` 创建指向 DSH Web UI 的 `JBCefBrowser`，并通过平台 content manager 将其停靠为标准工具窗口；旁边固定一个指向 `chat.deepseek.com` 的 **DeepSeek Chat** 标签页（不可关闭）。每个项目的活动浏览器会被注册下来，方便动作（action）访问。
 
 ### 无需重启的刷新
 

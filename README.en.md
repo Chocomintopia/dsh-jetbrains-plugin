@@ -9,11 +9,13 @@
 Docks the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) Web UI into a JetBrains IDE tool window, rendered by the IDE's bundled Chromium (JCEF). The full WebUI — reasoning streams, tool-call trajectory, sessions, permission/preset switching — **lives entirely inside the IDE, hideable like the terminal — no browser tab needed**.
 
 ![01.png](/docs/screenshots/01.png)
+![01.png](/docs/screenshots/02.png)
 
 ## Features
 
 - **Web UI inside the IDE** — the DeepSeek Harness web front-end docked as a standard tool window (right side), with the same look and behavior as the browser version.
-- **Refresh without restarting the IDE** — restart or rebuild the `dsh` server, then click the reload button in the tool-window header (or gear menu → *Reload Page*) to hard-reload the page, bypassing the browser cache. No IDE restart, ever.
+- **DeepSeek Chat pinned tab** — `chat.deepseek.com` is pinned as a permanent second tab next to the WebUI: always present, cannot be closed. No separate browser tab needed for the DeepSeek web chat.
+- **Refresh without restarting the IDE** — restart or rebuild the `dsh` server, then click the reload button in the tool-window header (or gear menu → *Reload Page*) to hard-reload the **currently active tab** (WebUI or DeepSeek Chat), bypassing the browser cache. No IDE restart, ever.
 - **Theme-aware icon** — the tool-window icon adapts automatically to the IDE's light/dark theme.
 
 ## Quick Start
@@ -49,14 +51,14 @@ Leave the terminal running — the server listens on `http://127.0.0.1:3080` by 
 ### 4. Open the tool window — and refresh
 
 1. Open the **DeepSeek Harness** tool window on the right edge of the IDE.
-2. The Web UI loads inside it — the same page you would see in a browser.
-3. Whenever you restart or rebuild the `dsh` server, or the page looks stale: click the **↻ reload button in the tool-window header (top-right)**, or open the gear menu → **Reload Page**. The page hard-reloads (cache bypassed) — no IDE restart needed.
+2. The Web UI loads inside it — the same page you would see in a browser; next to it a **DeepSeek Chat** tab (`chat.deepseek.com`) is pinned (sign in on first use).
+3. Whenever you restart or rebuild the `dsh` server, or the page looks stale: click the **↻ reload button in the tool-window header (top-right)**, or open the gear menu → **Reload Page**. The active tab hard-reloads (cache bypassed) — no IDE restart needed.
 
 ## What's inside
 
 ### Tool window (JCEF)
 
-`DshWebToolWindowFactory` creates a `JBCefBrowser` pointed at the DSH Web UI and docks it into a standard tool window through the platform content manager. The live browser is registered per project, so actions can reach it.
+`DshWebToolWindowFactory` creates a `JBCefBrowser` pointed at the DSH Web UI and docks it into a standard tool window through the platform content manager; next to it, a **DeepSeek Chat** tab (`chat.deepseek.com`) is pinned and cannot be closed. The live browser is registered per project, so actions can reach it.
 
 ### Reload without restart
 
